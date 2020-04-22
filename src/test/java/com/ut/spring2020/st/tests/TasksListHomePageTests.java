@@ -5,6 +5,8 @@ package com.ut.spring2020.st.tests;
  * webautomation
  **/
 
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.ut.spring2020.st.framework.Browser;
 import com.ut.spring2020.st.pages.TasksListHomePage;
 import com.ut.spring2020.st.utilities.TestReport;
@@ -26,6 +28,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +50,7 @@ public class TasksListHomePageTests extends BaseTest{
 
     // Test case to check home page loading
     @Test(groups = {"web"})
-    public void loadHomePage() throws InterruptedException {
+    public void loadHomePage() throws InterruptedException, IOException {
         browser.navigateToBaseUrl();
         browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
         TasksListHomePage page = (TasksListHomePage)browser.getCurrentPage();
@@ -72,6 +75,9 @@ public class TasksListHomePageTests extends BaseTest{
                 allButtons = false;
             }
         }
+
+        MediaEntityModelProvider mediaModel = MediaEntityBuilder.createScreenCaptureFromPath(TestReport.capture(browser.getDriver())).build();
+        TestReport.getExtentTest().info("Home page loaded ", mediaModel);
 
         //Assert.assertEquals(page.getTitleLabel(), "Task Dashboard");
         Assert.assertTrue(allButtons && pageTitle);

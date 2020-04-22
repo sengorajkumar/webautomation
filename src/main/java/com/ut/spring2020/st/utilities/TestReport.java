@@ -8,14 +8,20 @@ package com.ut.spring2020.st.utilities;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+
 //import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +41,7 @@ public class TestReport {
         sparkReporter = new ExtentSparkReporter(reportPath);
         sparkReporter.config().setDocumentTitle("Web Application Automation");
         sparkReporter.config().setReportName("Web Application Automation Execution Report");
-        sparkReporter.config().setTheme(com.aventstack.extentreports.reporter.configuration.Theme.DARK);
+        sparkReporter.config().setTheme(com.aventstack.extentreports.reporter.configuration.Theme.STANDARD);
         extentReport = new ExtentReports();
         extentReport.attachReporter(sparkReporter);
         extentReport.setSystemInfo("Application", "To do web application");
@@ -46,6 +52,49 @@ public class TestReport {
     public static void createTestCase(String name){
         extentTest = extentReport.createTest(name);
     }
+
+    public static void createTestNode(String name){
+        if(extentTest!=null) {
+            extentTest.createNode(name);
+        }
+    }
+    public static void createTestNode(String name, String description){
+        if(extentTest!=null) {
+            extentTest.createNode(name, description);
+        }
+    }
+
+    public static void logTest(Status status, String logMsg){
+        extentTest.log(status, logMsg);
+        //http://extentreports.com/docs/javadoc/com/aventstack/extentreports/Status.html
+        /*DEBUG
+                ERROR
+        FAIL
+                FATAL
+        INFO
+                PASS
+        SKIP
+                WARNING */
+    }
+
+
+    public static ExtentTest getExtentTest() {
+        return extentTest;
+    }
+
+    public static String capture(WebDriver driver) {
+        String screenimgpath ="";
+        try {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File Dest = new File(System.getProperty("user.dir") + "/report/" + System.currentTimeMillis() + ".png");
+            screenimgpath = Dest.getAbsolutePath();
+            FileUtils.copyFile(scrFile, Dest);
+        }catch(IOException exp){
+
+        }
+        return screenimgpath;
+    }
+
     // Log each test result
     public static void addTestResult(ITestResult result){
 
