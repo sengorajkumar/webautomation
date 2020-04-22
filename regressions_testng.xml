@@ -3,6 +3,7 @@
 <suite name="Suite" parallel="none">
 
     <parameter name="baseUrl" value="http://reactboot.cfapps.io/"/>
+    <parameter name="addTaskURL" value="http://reactboot.cfapps.io/task_add"/>
 
     <test name="Firefox Tests">
         <parameter name="browserName" value="Firefox"/>
@@ -14,9 +15,7 @@
 
         <classes>
             <class name="com.ut.spring2020.st.tests.TasksListHomePageTests" />
+            <class name="com.ut.spring2020.st.tests.AddTaskPageTests" />
         </classes>
     </test>
-
-
-
 </suite> <!-- Suite -->

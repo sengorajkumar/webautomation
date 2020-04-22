@@ -35,7 +35,7 @@ public class TestReport {
         sparkReporter = new ExtentSparkReporter(reportPath);
         sparkReporter.config().setDocumentTitle("Web Application Automation");
         sparkReporter.config().setReportName("Web Application Automation Execution Report");
-        sparkReporter.config().setTheme(com.aventstack.extentreports.reporter.configuration.Theme.STANDARD);
+        sparkReporter.config().setTheme(com.aventstack.extentreports.reporter.configuration.Theme.DARK);
         extentReport = new ExtentReports();
         extentReport.attachReporter(sparkReporter);
         extentReport.setSystemInfo("Application", "To do web application");

@@ -23,12 +23,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-public class TasksListHomePageTests {
+public class TasksListHomePageTests extends BaseTest{
 
     Browser browser;
 
@@ -43,18 +45,6 @@ public class TasksListHomePageTests {
         page = (TasksListHomePage)browser.getCurrentPage();
     }
 
-    @BeforeSuite(groups = {"web"})
-    public void beforeSuite()
-    {
-        TestReport.init();
-    }
-
-    @BeforeMethod(groups = {"web"})
-    public void beforeEachTestCase(Method method)
-    {
-        String className = this.getClass().getSimpleName();
-        TestReport.createTestCase(className + "-" + method.getName());
-    }
     // Test case to check home page loading
     @Test(groups = {"web"})
     public void loadHomePage() throws InterruptedException {
@@ -186,18 +176,6 @@ public class TasksListHomePageTests {
             pageTitle = false;
         }
         return (expectedURL.equals(browser.getCurrentUrl()) && pageTitle);
-    }
-
-    @AfterMethod(groups = {"web"})
-    public void afterEachTestCase(ITestResult result)
-    {
-        TestReport.addTestResult(result);
-    }
-
-    @AfterSuite(groups = {"web"})
-    public void afterSuite()
-    {
-        TestReport.flush();
     }
 
     @AfterClass(groups = {"web"})
