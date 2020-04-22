@@ -7,17 +7,24 @@ package com.ut.spring2020.st.tests;
 
 import com.ut.spring2020.st.framework.Browser;
 import com.ut.spring2020.st.pages.TasksListHomePage;
+import com.ut.spring2020.st.utilities.TestReport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByClassName;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterMethod;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,14 +43,22 @@ public class TasksListHomePageTests {
         page = (TasksListHomePage)browser.getCurrentPage();
     }
 
-    @Test
-    public void testName() {
+    @BeforeSuite(groups = {"web"})
+    public void beforeSuite()
+    {
+        TestReport.init();
     }
 
+    @BeforeMethod(groups = {"web"})
+    public void beforeEachTestCase(Method method)
+    {
+        String className = this.getClass().getSimpleName();
+        TestReport.createTestCase(className + "-" + method.getName());
+    }
     // Test case to check home page loading
     @Test(groups = {"web"})
-    public void LoadHomePage() throws InterruptedException {
-
+    public void loadHomePage() throws InterruptedException {
+        browser.navigateToBaseUrl();
         browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
         TasksListHomePage page = (TasksListHomePage)browser.getCurrentPage();
 
@@ -171,6 +186,18 @@ public class TasksListHomePageTests {
             pageTitle = false;
         }
         return (expectedURL.equals(browser.getCurrentUrl()) && pageTitle);
+    }
+
+    @AfterMethod(groups = {"web"})
+    public void afterEachTestCase(ITestResult result)
+    {
+        TestReport.addTestResult(result);
+    }
+
+    @AfterSuite(groups = {"web"})
+    public void afterSuite()
+    {
+        TestReport.flush();
     }
 
     @AfterClass(groups = {"web"})
