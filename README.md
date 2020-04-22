@@ -13,7 +13,7 @@ http://reactboot.cfapps.io/user - This a custom built to do list application
 * Selenium - Web automation
 * Maven - Build and package management
 * TestNG - Test execution and Reporting
-* ExtentReports - Rest execution report in HTML format
+* ExtentReports - Test execution report in HTML format
 
 ## How to run
 - Import the project in IntelliJ IDEA
