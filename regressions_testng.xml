@@ -4,7 +4,10 @@
 
     <parameter name="baseUrl" value="http://reactboot.cfapps.io/"/>
     <parameter name="addTaskURL" value="http://reactboot.cfapps.io/task_add"/>
-
+    <listeners>
+        <!-- PriorityInterceptor determines the order in which the test cases are executed. Its by the order of appearance in the code -->
+        <listener class-name="com.ut.spring2020.st.tests.PriorityInterceptor" />
+    </listeners>
     <test name="Firefox Tests">
         <parameter name="browserName" value="Firefox"/>
         <groups>
@@ -14,8 +17,11 @@
         </groups>
 
         <classes>
-            <class name="com.ut.spring2020.st.tests.TasksListHomePageTests" />
-            <class name="com.ut.spring2020.st.tests.AddTaskPageTests" />
+            <!--  <class name="com.ut.spring2020.st.tests.TasksDashboardTests" />
+             <class name="com.ut.spring2020.st.tests.AddTaskTests" />
+            <class name="com.ut.spring2020.st.tests.TaskDetailsTests" /> -->
+            <class name="com.ut.spring2020.st.tests.EditTaskTests" />
+
         </classes>
     </test>
 </suite> <!-- Suite -->

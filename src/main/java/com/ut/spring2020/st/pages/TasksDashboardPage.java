@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class TasksListHomePage extends Page {
+public class TasksDashboardPage extends Page {
 
     @FindBy(className = "panel-title")
     private WebElement titleLabel;
@@ -31,7 +31,7 @@ public class TasksListHomePage extends Page {
     @FindBy(id = "add_task")
     private WebElement addTaskBtn;
 
-    public TasksListHomePage(Browser browser) {
+    public TasksDashboardPage(Browser browser) {
         super(browser);
     }
 

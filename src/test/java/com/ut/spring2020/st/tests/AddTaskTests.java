@@ -1,18 +1,14 @@
 package com.ut.spring2020.st.tests;
 
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.aventstack.extentreports.Status;
 import com.ut.spring2020.st.framework.Browser;
 import com.ut.spring2020.st.pages.AddTaskPage;
-import com.ut.spring2020.st.pages.Page;
-import com.ut.spring2020.st.pages.TasksListHomePage;
+import com.ut.spring2020.st.pages.TasksDashboardPage;
 import com.ut.spring2020.st.utilities.TestReport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -32,33 +28,26 @@ import java.util.List;
  * webautomation
  **/
 
-public class AddTaskPageTests extends BaseTest{
+public class AddTaskTests extends BaseTest{
     Browser browser;
-    //Page page;
 
-    //@Parameters({"browserName", "addTaskURL"})
     @Parameters({"browserName", "baseUrl"})
     @BeforeClass(groups = {"web"})
     public void setUp(String browserName, String baseUrl) {
         browser = new Browser(browserName, baseUrl);
         browser.navigateToBaseUrl();
-        //browser.setCurrentPage(new AddTaskPage(browser)); // to do later remove the browser passed to page object;
-        //page = (AddTaskPage)browser.getCurrentPage();
     }
-    // Test case to check home page loading
+
     @Test(groups = {"web"})
     public void createTask() throws InterruptedException, IOException {
-        //browser.navigateToBaseUrl();
-        //browser.setCurrentPage(new AddTaskPage(browser)); // to do later remove the browser passed to page object;
-        //page = (AddTaskPage)browser.getCurrentPage();
-        TasksListHomePage page;
+        TasksDashboardPage page;
         String titleLbl;
         String taskName="";
         String taskStatus="";
 
         browser.navigateToBaseUrl();
-        browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
-        page = (TasksListHomePage)browser.getCurrentPage();
+        browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object
+        page = (TasksDashboardPage)browser.getCurrentPage();
 
         // Check if page title is present
         boolean pageTitle = true;
@@ -112,8 +101,8 @@ public class AddTaskPageTests extends BaseTest{
         }
 
 
-        browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
-        page = (TasksListHomePage)browser.getCurrentPage();
+        browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object
+        page = (TasksDashboardPage)browser.getCurrentPage();
 
         // Check if page title is present
         //boolean pageTitle = true;
@@ -128,6 +117,8 @@ public class AddTaskPageTests extends BaseTest{
                     TestReport.logTest(Status.INFO,"Found added task : " + elem.getText());
                     break;
                 }
+
+
             }
 
             MediaEntityModelProvider mediaModel = MediaEntityBuilder.createScreenCaptureFromPath(TestReport.capture(browser.getDriver())).build();
@@ -143,7 +134,6 @@ public class AddTaskPageTests extends BaseTest{
         }
         Assert.assertTrue(allButtons && pageTitle);
     }
-
 
     @AfterClass(groups = {"web"})
     public void tearDown() {

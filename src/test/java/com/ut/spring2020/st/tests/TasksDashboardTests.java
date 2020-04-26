@@ -8,52 +8,47 @@ package com.ut.spring2020.st.tests;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.ut.spring2020.st.framework.Browser;
-import com.ut.spring2020.st.pages.TasksListHomePage;
+import com.ut.spring2020.st.pages.TasksDashboardPage;
 import com.ut.spring2020.st.utilities.TestReport;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByClassName;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.AfterTest;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-public class TasksListHomePageTests extends BaseTest{
+public class TasksDashboardTests extends BaseTest{
 
     Browser browser;
 
-    TasksListHomePage page;
+    TasksDashboardPage page;
 
     @Parameters({"browserName", "baseUrl"})
     @BeforeClass(groups = {"web"})
     public void setUp(String browserName, String baseUrl) {
         browser = new Browser(browserName, baseUrl);
         browser.navigateToBaseUrl();
-        browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object;
-        page = (TasksListHomePage)browser.getCurrentPage();
+        browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object;
+        page = (TasksDashboardPage)browser.getCurrentPage();
     }
 
+    @Test(groups = {"web"})
+    public void zeebra() {
+        Assert.assertTrue(true);
+    }
     // Test case to check home page loading
     @Test(groups = {"web"})
-    public void loadHomePage() throws InterruptedException, IOException {
+    public void loadTaskDashboard() throws InterruptedException, IOException {
         browser.navigateToBaseUrl();
-        browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
-        TasksListHomePage page = (TasksListHomePage)browser.getCurrentPage();
+        browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object
+        TasksDashboardPage page = (TasksDashboardPage)browser.getCurrentPage();
 
         // Check if page title is present
         boolean pageTitle = true;
@@ -87,8 +82,8 @@ public class TasksListHomePageTests extends BaseTest{
     @Test(groups = {"web"})
     public void viewTasks() throws InterruptedException {
         browser.navigateToBaseUrl();
-        browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
-        TasksListHomePage page = (TasksListHomePage)browser.getCurrentPage();
+        browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object
+        TasksDashboardPage page = (TasksDashboardPage)browser.getCurrentPage();
 
         page.getViewTasksBtn().click();
 
@@ -114,8 +109,8 @@ public class TasksListHomePageTests extends BaseTest{
     @Test(groups = {"web"})
     public void createUser() throws InterruptedException {
         browser.navigateToBaseUrl();
-        browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
-        TasksListHomePage page = (TasksListHomePage)browser.getCurrentPage();
+        browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object
+        TasksDashboardPage page = (TasksDashboardPage)browser.getCurrentPage();
 
         page.getCreateUsrBtn().click();
 
@@ -140,8 +135,8 @@ public class TasksListHomePageTests extends BaseTest{
     @Test(groups = {"web"})
     public void viewUsers() throws InterruptedException {
         browser.navigateToBaseUrl();
-        browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
-        TasksListHomePage page = (TasksListHomePage)browser.getCurrentPage();
+        browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object
+        TasksDashboardPage page = (TasksDashboardPage)browser.getCurrentPage();
 
         page.getViewUsrBtn().click();
 
@@ -166,8 +161,8 @@ public class TasksListHomePageTests extends BaseTest{
     private boolean checkPageLoad(WebElement button, String pageTitleLbl, String expectedURL){
         boolean pageTitle = true;
         browser.navigateToBaseUrl();
-        //browser.setCurrentPage(new TasksListHomePage(browser)); // to do later remove the browser passed to page object
-        //TasksListHomePage page = (TasksListHomePage)browser.getCurrentPage();
+        //browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object
+        //TasksDashboardPage page = (TasksDashboardPage)browser.getCurrentPage();
 
         button.click();
 

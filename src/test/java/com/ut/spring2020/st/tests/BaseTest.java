@@ -3,10 +3,8 @@ package com.ut.spring2020.st.tests;
 import com.ut.spring2020.st.utilities.TestReport;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
 import java.lang.reflect.Method;
@@ -19,26 +17,23 @@ import java.lang.reflect.Method;
 
 public class BaseTest {
     @BeforeTest(groups = {"web"})
-    public void beforeSuite()
-    {
+    public void beforeSuite() {
         TestReport.init();
     }
+
     @BeforeMethod(groups = {"web"})
-    public void beforeEachTestCase(Method method)
-    {
+    public void beforeEachTestCase(Method method) {
         String className = this.getClass().getSimpleName();
         TestReport.createTestCase(className + "-" + method.getName());
     }
+
     @AfterMethod(groups = {"web"})
-    public void afterEachTestCase(ITestResult result)
-    {
+    public void afterEachTestCase(ITestResult result) {
         TestReport.addTestResult(result);
     }
 
     @AfterTest(groups = {"web"})
-    public void afterSuite()
-    {
+    public void afterSuite() {
         TestReport.flush();
     }
-
 }
