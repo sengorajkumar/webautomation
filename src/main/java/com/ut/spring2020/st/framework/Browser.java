@@ -9,6 +9,7 @@ package com.ut.spring2020.st.framework;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -45,8 +46,16 @@ public class Browser {
                 System.setProperty("webdriver.gecko.driver", seleniumFolderPath + "geckodriver");
                 capabilities.setBrowserName("firefox");
                 capabilities.setCapability(FirefoxDriver.PROFILE, ff_profile);
-
                 driver = new FirefoxDriver(capabilities);
+                break;
+            case "Chrome":
+                ChromeOptions chrome_options = new ChromeOptions();
+                chrome_options.addArguments("--disable-geolocation");
+                chrome_options.addArguments("--incognito");
+                System.setProperty("webdriver.chrome.driver", seleniumFolderPath + "chromedriver");
+                capabilities.setBrowserName("chrome");
+                capabilities.setCapability(ChromeOptions.CAPABILITY, chrome_options);
+                driver = new ChromeDriver(capabilities);
                 break;
             default:
                 System.out.println("Invalid browser passed in: " + browser);

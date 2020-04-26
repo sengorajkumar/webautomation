@@ -17,11 +17,29 @@
         </groups>
 
         <classes>
-            <!--  <class name="com.ut.spring2020.st.tests.TasksDashboardTests" />
-             <class name="com.ut.spring2020.st.tests.AddTaskTests" />
-            <class name="com.ut.spring2020.st.tests.TaskDetailsTests" /> -->
-            <class name="com.ut.spring2020.st.tests.EditTaskTests" />
-
+            <class name="com.ut.spring2020.st.tests.TasksDashboardTests"/>
+            <class name="com.ut.spring2020.st.tests.AddTaskTests"/>
+            <class name="com.ut.spring2020.st.tests.TaskDetailsTests"/>
+            <class name="com.ut.spring2020.st.tests.EditTaskTests"/>
+            <class name="com.ut.spring2020.st.tests.ManagerUserTests"/>
         </classes>
     </test>
+    <!--
+    <test name="Chrome Tests">
+        <parameter name="browserName" value="Chrome"/>
+        <groups>
+            <run>
+                <include name="web"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="com.ut.spring2020.st.tests.TasksDashboardTests" />
+             <class name="com.ut.spring2020.st.tests.AddTaskTests" />
+            <class name="com.ut.spring2020.st.tests.TaskDetailsTests" />
+            <class name="com.ut.spring2020.st.tests.EditTaskTests" />
+            <class name="com.ut.spring2020.st.tests.ManagerUserTests" />
+        </classes>
+    </test>
+    -->
 </suite> <!-- Suite -->
