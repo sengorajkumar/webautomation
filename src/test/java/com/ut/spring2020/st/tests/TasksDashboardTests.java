@@ -38,11 +38,7 @@ public class TasksDashboardTests extends BaseTest{
         browser.setCurrentPage(new TasksDashboardPage(browser)); // to do later remove the browser passed to page object;
         page = (TasksDashboardPage)browser.getCurrentPage();
     }
-
-    @Test(groups = {"web"})
-    public void zeebra() {
-        Assert.assertTrue(true);
-    }
+    
     // Test case to check home page loading
     @Test(groups = {"web"})
     public void loadTaskDashboard() throws InterruptedException, IOException {
